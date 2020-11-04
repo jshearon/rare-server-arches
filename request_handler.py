@@ -2,6 +2,7 @@ import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from users.request import create_new_user
 from users import get_user_by_id, get_user_by_email
+from posts import get_all_posts, get_single_post, create_post, update_post, delete_post
 
 class HandleRequests(BaseHTTPRequestHandler):
 
@@ -63,11 +64,11 @@ class HandleRequests(BaseHTTPRequestHandler):
                     response = f"{get_user_by_id(id)}"
                 else:
                     response = ""
-            elif resource == "post":
+            elif resource == "posts":
                 if id is not None:
-                    response = ""
+                    response = f"{get_single_post(id)}"
                 else:
-                    response = ""
+                    response = f"{get_all_posts()}"
             elif resource == "comment":
                 if id is not None:
                     response = ""
@@ -102,6 +103,8 @@ class HandleRequests(BaseHTTPRequestHandler):
         new_object = None
         if resource == "user":
             new_object = create_new_user(post_body)
+        if resource == "posts":
+            new_object = create_post(post_body)
         self.wfile.write(f"{new_object}".encode())
 
     def do_PUT(self):
@@ -116,6 +119,8 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         if resource == "user":
             success = ""
+        if resource == "posts":
+            update_post(id, post_body)
 
         if success:
             self._set_headers(204)
@@ -133,6 +138,8 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         if resource == "user":
           print("")
+        if resource == "posts":
+            delete_post(id)
             
 
         # Encode the new animal and send in response
