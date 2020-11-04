@@ -3,7 +3,8 @@ CREATE TABLE `users` (
   `first_name` TEXT NOT NULL,
   `last_name` TEXT NOT NULL,
   `display_name` TEXT NOT NULL,
-  `email` TEXT NOT NULL
+  `email` TEXT NOT NULL, 
+  `created_on` DATETIME NOT NULL
 );
 
 CREATE TABLE `categories` (
@@ -45,3 +46,13 @@ CREATE TABLE `comments` (
   `is_edited` BOOLEAN DEFAULT(FALSE),
   FOREIGN KEY (`post_id`) REFERENCES `posts` ('id')
 );
+
+ALTER TABLE users
+  ADD `new_column_name` DATETIME;
+
+SELECT * from users
+
+PRAGMA table_info(users);
+
+ALTER TABLE users
+RENAME COLUMN new_column_name TO created_on;
