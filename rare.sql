@@ -48,9 +48,8 @@ CREATE TABLE `comments` (
 );
 
 
-
-INSERT INTO `users` VALUES (null, 'Jonathan', 'north', "Jon", "gaikwad@ddd.com");
-INSERT INTO `users` VALUES (null, 'Phonesalo', 'south', "Phone", "nikhil@ddd.com");
+INSERT INTO `users` VALUES (null, 'Jonathan', 'north', "Jon", "gaikwad@ddd.com", "jan 1 2009 13:22:15");
+INSERT INTO `users` VALUES (null, 'Phonesalo', 'south', "Phone", "nikhil@ddd.com", "jan 1 2009 13:22:15");
 
 INSERT INTO `postTags` VALUES (null, 1, 1);
 INSERT INTO `postTags` VALUES (null, 1, 2);
