@@ -1,11 +1,8 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
-<<<<<<< Updated upstream
 from users.request import create_new_user
 from users import get_user_by_id, get_user_by_email
-=======
 from categories.request import get_all_categories, get_single_category
->>>>>>> Stashed changes
 
 class HandleRequests(BaseHTTPRequestHandler):
 
@@ -90,17 +87,14 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         # three item url a.k.a `/resource?parameter=value`
         elif len(parsed) == 3:
-            ( resource, key ) = parsed
+            ( resource, key, value ) = parsed
 
-<<<<<<< Updated upstream
             if key == "email" and resource == "user":
                 response = f"{get_user_by_email(value)}"
 
-=======
             if key == "post_id" and resource == "comment":
                 response = ""
         
->>>>>>> Stashed changes
         self.wfile.write(response.encode())
 
     def do_POST(self):
