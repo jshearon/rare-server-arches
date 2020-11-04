@@ -1,5 +1,7 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
+from users.request import create_new_user
+from users import get_user_by_id, get_user_by_email
 
 class HandleRequests(BaseHTTPRequestHandler):
 
@@ -56,7 +58,12 @@ class HandleRequests(BaseHTTPRequestHandler):
         if len(parsed) == 2:
             ( resource, id ) = parsed
 
-            if resource == "post":
+            if resource == "user":
+                if id is not None:
+                    response = f"{get_user_by_id(id)}"
+                else:
+                    response = ""
+            elif resource == "post":
                 if id is not None:
                     response = ""
                 else:
@@ -81,8 +88,8 @@ class HandleRequests(BaseHTTPRequestHandler):
         elif len(parsed) == 3:
             ( resource, key, value ) = parsed
 
-            if key == "post_id" and resource == "comment":
-                response = ""
+            if key == "email" and resource == "user":
+                response = f"{get_user_by_email(value)}"
 
         self.wfile.write(response.encode())
 
@@ -94,7 +101,7 @@ class HandleRequests(BaseHTTPRequestHandler):
         (resource, id) = self.parse_url(self.path)
         new_object = None
         if resource == "user":
-            new_object = ""
+            new_object = create_new_user(post_body)
         self.wfile.write(f"{new_object}".encode())
 
     def do_PUT(self):
