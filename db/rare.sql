@@ -3,7 +3,8 @@ CREATE TABLE `users` (
   `first_name` TEXT NOT NULL,
   `last_name` TEXT NOT NULL,
   `display_name` TEXT NOT NULL,
-  `email` TEXT NOT NULL
+  `email` TEXT NOT NULL, 
+  `created_on` DATETIME NOT NULL
 );
 
 CREATE TABLE `categories` (
