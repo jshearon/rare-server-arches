@@ -45,3 +45,33 @@ CREATE TABLE `comments` (
   `is_edited` BOOLEAN DEFAULT(FALSE),
   FOREIGN KEY (`post_id`) REFERENCES `posts` ('id')
 );
+
+
+
+INSERT INTO `users` VALUES (null, 'Jonathan', 'north', "Jon", "gaikwad@ddd.com");
+INSERT INTO `users` VALUES (null, 'Phonesalo', 'south', "Phone", "nikhil@ddd.com");
+
+INSERT INTO `postTags` VALUES (null, 1, 1);
+INSERT INTO `postTags` VALUES (null, 1, 2);
+INSERT INTO `postTags` VALUES (null, 1, 3);
+INSERT INTO `postTags` VALUES (null, 2, 1);
+INSERT INTO `postTags` VALUES (null, 2, 2);
+INSERT INTO `postTags` VALUES (null, 2, 3);
+
+INSERT INTO `posts` VALUES (null, "Mo Silvera", "201 Created St tag1", 1, 'jan 1 2009 13:22:15', 1, "imageURL");
+INSERT INTO `posts` VALUES (null, "Bryan Nilsen", "500 Internal Error Blvd", 1, 'jan 1 2010 13:22:15', 1, "imageURL");
+INSERT INTO `posts` VALUES (null, "Jenna Solis", "301 Redirect Ave", 2, 'jan 1 2011 13:22:15', 2, "imageURL");
+INSERT INTO `posts` VALUES (null, "Emily Lemmon", "454 Mulberry Way", 2, 'jan 1 2012 13:22:15', 2, "imageURL");
+
+INSERT INTO `comments` VALUES (null, 1, "Snickers", "Recreation", "jan 1 2019 13:22:15", true);
+INSERT INTO `comments` VALUES (null, 2, "Jax", "Treatment", "jan 1 2020 13:22:15", false);
+INSERT INTO `comments` VALUES (null, 3, "Falafel", "Treatment", "jan 1 2021 13:22:15", true);
+INSERT INTO `comments` VALUES (null, 4, "Doodles", "Kennel", "jan 1 2022 13:22:15", false);
+
+INSERT INTO `tags` VALUES (null, "tag1");
+INSERT INTO `tags` VALUES (null, "tag2");
+INSERT INTO `tags` VALUES (null, "tag3");
+
+INSERT INTO `categories` VALUES (null, "categories1");
+INSERT INTO `categories` VALUES (null, "categories2");
+
