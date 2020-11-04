@@ -2,10 +2,10 @@ from datetime import datetime
 
 class User():
 
-    def __init__(self, id, firstName, lastName, displayName, email):
+    def __init__(self, id, firstName, lastName, displayName, email, created_on):
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
         self.displayName = displayName
         self.email = email
-        self.createdOn = datetime.now()
+        self.created_on = created_on
