@@ -47,9 +47,8 @@ CREATE TABLE `comments` (
   FOREIGN KEY (`post_id`) REFERENCES `posts` ('id')
 );
 
-<<<<<<< Updated upstream
 ALTER TABLE users
-  ADD `new_column_name` DATETIME;
+  ADD `created_on` DATETIME;
 
 SELECT * from users
 
@@ -57,7 +56,7 @@ PRAGMA table_info(users);
 
 ALTER TABLE users
 RENAME COLUMN new_column_name TO created_on;
-=======
+
 INSERT INTO `tags` VALUES (null, "tag1");
 INSERT INTO `tags` VALUES (null, "tag2");
 INSERT INTO `tags` VALUES (null, "tag3");
@@ -86,4 +85,3 @@ INSERT INTO `comments` VALUES (null, 3, "Falafel", "Treatment", "jan 1 2021 13:2
 INSERT INTO `comments` VALUES (null, 4, "Doodles", "Kennel", "jan 1 2022 13:22:15", false);
 
 PRAGMA TABLE_INFO(categories)
->>>>>>> Stashed changes
