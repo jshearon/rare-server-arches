@@ -45,11 +45,13 @@ def get_user_by_email(email):
     WHERE u.email LIKE ?
     """, ( '%'+email+'%', ))
 
-    data = db_cursor.fetchone()
-
-    user = User(data['id'], data['first_name'], data['last_name'], 
-      data['display_name'], data['email'], data['created_on'])
-    return json.dumps(user.__dict__)
+    row_exists = db_cursor.fetchone() is not None
+    token = 12345
+    if row_exists:
+      returnObject = {"valid": "valid", "token": token}
+    else:
+      returnObject = {"invalid":"invalid"}
+    return json.dumps(returnObject)
 
 def create_new_user(new_user):
   with sqlite3.connect("./db/rare.db") as conn:
@@ -66,7 +68,7 @@ def create_new_user(new_user):
     row_exists = db_cursor.fetchone() is not None
     
     if row_exists: 
-      return {"userAlreadyExists": True}
+      return json.dumps({"valid": "User already Exists"})
     else:
       db_cursor.execute("""
         INSERT INTO users
@@ -77,7 +79,7 @@ def create_new_user(new_user):
 
       id = db_cursor.lastrowid
       new_user['id'] = id
-      return json.dumps(new_user)
+      return json.dumps({"valid": "valid"})
 
 def update_user(id, new_user):
   with sqlite3.connect("./db/rare.db") as conn:

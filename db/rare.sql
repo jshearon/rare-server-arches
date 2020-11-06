@@ -52,7 +52,7 @@ ALTER TABLE users
 
 SELECT * from users
 
-PRAGMA table_info(users);
+PRAGMA table_info(comments);
 
 ALTER TABLE users
 RENAME COLUMN new_column_name TO created_on;
