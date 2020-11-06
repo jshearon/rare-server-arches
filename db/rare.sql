@@ -3,8 +3,7 @@ CREATE TABLE `users` (
   `first_name` TEXT NOT NULL,
   `last_name` TEXT NOT NULL,
   `display_name` TEXT NOT NULL,
-  `email` TEXT NOT NULL, 
-  `created_on` DATETIME NOT NULL
+  `email` TEXT NOT NULL
 );
 
 CREATE TABLE `categories` (
@@ -83,5 +82,3 @@ INSERT INTO `comments` VALUES (null, 1, "Snickers", "Recreation", "jan 1 2019 13
 INSERT INTO `comments` VALUES (null, 2, "Jax", "Treatment", "jan 1 2020 13:22:15", false);
 INSERT INTO `comments` VALUES (null, 3, "Falafel", "Treatment", "jan 1 2021 13:22:15", true);
 INSERT INTO `comments` VALUES (null, 4, "Doodles", "Kennel", "jan 1 2022 13:22:15", false);
-
-PRAGMA TABLE_INFO(categories)
