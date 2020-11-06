@@ -79,16 +79,16 @@ def create_new_user(new_user):
       new_user['id'] = id
       return json.dumps(new_user)
 
-def update_entry(id, new_user):
-  with sqlite3.connect("./db/dailyjournal.db") as conn:
+def update_user(id, new_user):
+  with sqlite3.connect("./db/rare.db") as conn:
     conn.row_factory = sqlite3.Row
     db_cursor = conn.cursor()
 
     db_cursor.execute("""
-      UPDATE entries
-      SET concept = ?, entry = ?, date = ?, moodId = ?
+      UPDATE users
+      SET first_name = ?, last_name = ?, display_name = ?, email = ?
       WHERE id = ?
-    """, ( new_user['concept'], new_user['entry'], new_user['date'], new_user['moodId'], id, ))
+    """, ( new_user['first_name'], new_user['last_name'], new_user['display_name'], new_user['email'], id, ))
 
     rows_affected = db_cursor.rowcount
     if rows_affected == 0:
@@ -96,12 +96,12 @@ def update_entry(id, new_user):
     else:
         return True
 
-def delete_entry(id):
-  with sqlite3.connect("./db/dailyjournal.db") as conn:
+def delete_user(id):
+  with sqlite3.connect("./db/rare.db") as conn:
     conn.row_factory = sqlite3.Row
     db_cursor = conn.cursor()
   
     db_cursor.execute("""
-      DELETE FROM entries
+      DELETE FROM users
       WHERE id = ?
       """, ( id, ))

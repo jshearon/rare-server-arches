@@ -1,6 +1,6 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from users.request import create_new_user
+from users.request import create_new_user, delete_user, update_user
 from users import get_user_by_id, get_user_by_email
 from categories.request import get_all_categories, get_single_category
 
@@ -119,7 +119,7 @@ class HandleRequests(BaseHTTPRequestHandler):
         success = False
 
         if resource == "user":
-            success = ""
+            success = update_user(id, post_body)
 
         if success:
             self._set_headers(204)
@@ -129,21 +129,15 @@ class HandleRequests(BaseHTTPRequestHandler):
         self.wfile.write("".encode())
 
     def do_DELETE(self):
-        # Set a 204 response code
         self._set_headers(204)
 
-        # Parse the URL
         (resource, id) = self.parse_url(self.path)
 
         if resource == "user":
-          print("")
+          delete_user(id)
             
-
-        # Encode the new animal and send in response
         self.wfile.write("".encode())
 
-# This function is not inside the class. It is the starting
-# point of this application.
 def main():
     host = ''
     port = 8088
