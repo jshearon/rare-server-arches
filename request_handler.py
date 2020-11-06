@@ -2,7 +2,7 @@ import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from users.request import create_new_user
 from users import get_user_by_id, get_user_by_email
-from categories.request import get_all_categories, get_single_category
+from categories.request import get_all_categories, get_single_category, create_category
 
 class HandleRequests(BaseHTTPRequestHandler):
 
@@ -101,12 +101,22 @@ class HandleRequests(BaseHTTPRequestHandler):
         self._set_headers(201)
         content_len = int(self.headers.get('content-length', 0))
         post_body = self.rfile.read(content_len)
+
         post_body = json.loads(post_body)
+
         (resource, id) = self.parse_url(self.path)
+
         new_object = None
+
+        new_category = None
+
         if resource == "user":
             new_object = create_new_user(post_body)
+        elif resource == "categories":
+            new_category = create_category(post_body)
+
         self.wfile.write(f"{new_object}".encode())
+        self.wfile.write(f"{new_category}".encode())
 
     def do_PUT(self):
         content_len = int(self.headers.get('content-length', 0))
