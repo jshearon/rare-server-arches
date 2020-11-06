@@ -46,6 +46,16 @@ CREATE TABLE `comments` (
   FOREIGN KEY (`post_id`) REFERENCES `posts` ('id')
 );
 
+ALTER TABLE users
+  ADD `created_on` DATETIME;
+
+SELECT * from users
+
+PRAGMA table_info(comments);
+
+ALTER TABLE users
+RENAME COLUMN new_column_name TO created_on;
+
 INSERT INTO `tags` VALUES (null, "tag1");
 INSERT INTO `tags` VALUES (null, "tag2");
 INSERT INTO `tags` VALUES (null, "tag3");
