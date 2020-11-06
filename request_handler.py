@@ -2,7 +2,7 @@ import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from users.request import create_new_user, delete_user, update_user
 from users import get_user_by_id, get_user_by_email
-from categories.request import get_all_categories, get_single_category, create_category
+from categories.request import delete_category, get_all_categories, get_single_category, create_category
 
 class HandleRequests(BaseHTTPRequestHandler):
 
@@ -127,9 +127,14 @@ class HandleRequests(BaseHTTPRequestHandler):
 
     def do_DELETE(self):
         self._set_headers(204)
+
         (resource, id) = self.parse_url(self.path)
+
         if resource == "user":
           delete_user(id)
+        elif resource == "categories":
+          delete_category(id)
+
         self.wfile.write("".encode())
 
 def main():
