@@ -48,6 +48,7 @@ CREATE TABLE `comments` (
 );
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 ALTER TABLE users
   ADD `new_column_name` DATETIME;
 
@@ -58,6 +59,8 @@ PRAGMA table_info(users);
 ALTER TABLE users
 RENAME COLUMN new_column_name TO created_on;
 
+=======
+>>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
 INSERT INTO `tags` VALUES (null, "tag1");
