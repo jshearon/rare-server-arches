@@ -68,7 +68,7 @@ def create_new_user(new_user):
     row_exists = db_cursor.fetchone() is not None
     
     if row_exists: 
-      return json.dumps({"valid": "User already Exists"})
+      return json.dumps({"invalid": "User already Exists"})
     else:
       db_cursor.execute("""
         INSERT INTO users

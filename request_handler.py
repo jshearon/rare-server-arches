@@ -98,17 +98,15 @@ class HandleRequests(BaseHTTPRequestHandler):
         post_body = json.loads(post_body)
         (resource, id) = self.parse_url(self.path)
         new_object = None
-        new_category = None
       
         if resource == "user":
             new_object = create_new_user(post_body)
-        if resource == "posts":
+        elif resource == "posts":
             new_object = create_post(post_body)
         elif resource == "categories":
-            new_category = create_category(post_body)
+            new_object = create_category(post_body)
 
         self.wfile.write(f"{new_object}".encode())
-        self.wfile.write(f"{new_category}".encode())
 
     def do_PUT(self):
         content_len = int(self.headers.get('content-length', 0))
