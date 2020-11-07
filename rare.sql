@@ -39,11 +39,11 @@ CREATE TABLE `postTags` (
 
 CREATE TABLE `comments` (
   `id` INTEGER PRIMARY KEY AUTOINCREMENT,
-  `post_id` INTEGER,
+  `post_id` INTEGER NOT NULL,
   `subject` TEXT NOT NULL,
   `content` TEXT NOT NULL,
   `created_on` DATETIME NOT NULL,
-  `is_edited` BOOLEAN DEFAULT(FALSE),
+  `is_edited` BOOLEAN,
   FOREIGN KEY (`post_id`) REFERENCES `posts` ('id')
 );
 
