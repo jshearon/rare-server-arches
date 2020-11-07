@@ -5,7 +5,7 @@ from models import User
 
 
 def get_user_by_id(id):
-  with sqlite3.connect("./db/rare.db") as conn:
+  with sqlite3.connect("./rare.db") as conn:
     conn.row_factory = sqlite3.Row
     db_cursor = conn.cursor()
 
@@ -23,12 +23,12 @@ def get_user_by_id(id):
 
     data = db_cursor.fetchone()
 
-    user = User(data['id'], data['first_name'], data['last_name'],
-                            data['display_name'], data['email'], data['created_on'])
+    user = User(data['id'], data['first_name'], data['last_name'], 
+                      data['display_name'], data['email'], data['created_on'])
     return json.dumps(user.__dict__)
 
 def get_user_by_email(email):
-  with sqlite3.connect("./db/rare.db") as conn:
+  with sqlite3.connect("./rare.db") as conn:
     conn.row_factory = sqlite3.Row
     db_cursor = conn.cursor()
 
@@ -54,7 +54,7 @@ def get_user_by_email(email):
     return json.dumps(returnObject)
 
 def create_new_user(new_user):
-  with sqlite3.connect("./db/rare.db") as conn:
+  with sqlite3.connect("./rare.db") as conn:
     conn.row_factory = sqlite3.Row
     db_cursor = conn.cursor()
 
@@ -82,7 +82,7 @@ def create_new_user(new_user):
       return json.dumps({"valid": "valid"})
 
 def update_user(id, new_user):
-  with sqlite3.connect("./db/rare.db") as conn:
+  with sqlite3.connect("./rare.db") as conn:
     conn.row_factory = sqlite3.Row
     db_cursor = conn.cursor()
 
@@ -99,7 +99,7 @@ def update_user(id, new_user):
         return True
 
 def delete_user(id):
-  with sqlite3.connect("./db/rare.db") as conn:
+  with sqlite3.connect("./rare.db") as conn:
     conn.row_factory = sqlite3.Row
     db_cursor = conn.cursor()
   

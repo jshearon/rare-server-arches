@@ -12,7 +12,7 @@ class HandleRequests(BaseHTTPRequestHandler):
        
         if "?" in resource:
 
-            param = resource.split("?")
+            param = resource.split("?")[1]
             resource = resource.split("?")[0]
             pair = param.split("=")
             key = pair[0]
@@ -144,3 +144,6 @@ def main():
     host = ''
     port = 8088
     HTTPServer((host, port), HandleRequests).serve_forever()
+
+if __name__ == "__main__":
+    main()

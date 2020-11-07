@@ -3,7 +3,8 @@ CREATE TABLE `users` (
   `first_name` TEXT NOT NULL,
   `last_name` TEXT NOT NULL,
   `display_name` TEXT NOT NULL,
-  `email` TEXT NOT NULL
+  `email` TEXT NOT NULL,
+  `created_on` DATETIME
 );
 
 CREATE TABLE `categories` (
@@ -42,7 +43,7 @@ CREATE TABLE `comments` (
   `subject` TEXT NOT NULL,
   `content` TEXT NOT NULL,
   `created_on` DATETIME NOT NULL,
-  `is_edited` BOOLEAN DEFAULT(FALSE),
+  `is_edited` BOOLEAN,
   FOREIGN KEY (`post_id`) REFERENCES `posts` ('id')
 );
 

@@ -3,8 +3,8 @@
     {
       "previewLimit": 50,
       "driver": "SQLite",
-      "name": "rare",
-      "database": "${workspaceFolder:rare-server-arches}/db/rare.db"
+      "name": "Rare",
+      "database": "${workspaceFolder:rare-server-arches}/rare.db"
     }
   ]
 }
