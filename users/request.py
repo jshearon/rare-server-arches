@@ -45,11 +45,13 @@ def get_user_by_email(email):
     WHERE u.email LIKE ?
     """, ( '%'+email+'%', ))
 
-    data = db_cursor.fetchone()
-
-    user = User(data['id'], data['first_name'], data['last_name'], 
-      data['display_name'], data['email'], data['created_on'])
-    return json.dumps(user.__dict__)
+    row_exists = db_cursor.fetchone() is not None
+    token = 12345
+    if row_exists:
+      returnObject = {"valid": "valid", "token": token}
+    else:
+      returnObject = {"invalid":"invalid"}
+    return json.dumps(returnObject)
 
 def create_new_user(new_user):
   with sqlite3.connect("./db/rare.db") as conn:
@@ -66,7 +68,7 @@ def create_new_user(new_user):
     row_exists = db_cursor.fetchone() is not None
     
     if row_exists: 
-      return {"userAlreadyExists": True}
+      return json.dumps({"valid": "User already Exists"})
     else:
       db_cursor.execute("""
         INSERT INTO users
@@ -77,18 +79,18 @@ def create_new_user(new_user):
 
       id = db_cursor.lastrowid
       new_user['id'] = id
-      return json.dumps(new_user)
+      return json.dumps({"valid": "valid"})
 
-def update_entry(id, new_user):
-  with sqlite3.connect("./db/dailyjournal.db") as conn:
+def update_user(id, new_user):
+  with sqlite3.connect("./db/rare.db") as conn:
     conn.row_factory = sqlite3.Row
     db_cursor = conn.cursor()
 
     db_cursor.execute("""
-      UPDATE entries
-      SET concept = ?, entry = ?, date = ?, moodId = ?
+      UPDATE users
+      SET first_name = ?, last_name = ?, display_name = ?, email = ?
       WHERE id = ?
-    """, ( new_user['concept'], new_user['entry'], new_user['date'], new_user['moodId'], id, ))
+    """, ( new_user['first_name'], new_user['last_name'], new_user['display_name'], new_user['email'], id, ))
 
     rows_affected = db_cursor.rowcount
     if rows_affected == 0:
@@ -96,12 +98,12 @@ def update_entry(id, new_user):
     else:
         return True
 
-def delete_entry(id):
-  with sqlite3.connect("./db/dailyjournal.db") as conn:
+def delete_user(id):
+  with sqlite3.connect("./db/rare.db") as conn:
     conn.row_factory = sqlite3.Row
     db_cursor = conn.cursor()
   
     db_cursor.execute("""
-      DELETE FROM entries
+      DELETE FROM users
       WHERE id = ?
       """, ( id, ))
