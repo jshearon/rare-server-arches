@@ -2,6 +2,7 @@ import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from users.request import create_new_user, delete_user, update_user
 from users import get_user_by_id, get_user_by_email
+from posts import get_all_posts, get_single_post, create_post, update_post, delete_post
 from categories.request import delete_category, get_all_categories, get_single_category, create_category, update_category
 
 class HandleRequests(BaseHTTPRequestHandler):
@@ -58,11 +59,11 @@ class HandleRequests(BaseHTTPRequestHandler):
                     response = f"{get_user_by_id(id)}"
                 else:
                     response = ""
-            elif resource == "post":
+            elif resource == "posts":
                 if id is not None:
-                    response = ""
+                    response = f"{get_single_post(id)}"
                 else:
-                    response = ""
+                    response = f"{get_all_posts()}"
             elif resource == "comment":
                 if id is not None:
                     response = ""
@@ -101,6 +102,8 @@ class HandleRequests(BaseHTTPRequestHandler):
       
         if resource == "user":
             new_object = create_new_user(post_body)
+        if resource == "posts":
+            new_object = create_post(post_body)
         elif resource == "categories":
             new_category = create_category(post_body)
 
@@ -117,6 +120,9 @@ class HandleRequests(BaseHTTPRequestHandler):
         success = False
 
         if resource == "user":
+            success = ""
+        if resource == "posts":
+            update_post(id, post_body)
             success = update_user(id, post_body)
         elif resource == "categories":
             success = update_category(id, post_body)
@@ -134,7 +140,9 @@ class HandleRequests(BaseHTTPRequestHandler):
         (resource, id) = self.parse_url(self.path)
 
         if resource == "user":
-          delete_user(id)
+            delete_user(id)
+        elif resource == "posts":
+            delete_post(id)          
         elif resource == "categories":
           delete_category(id)
 
@@ -144,6 +152,6 @@ def main():
     host = ''
     port = 8088
     HTTPServer((host, port), HandleRequests).serve_forever()
-
+    
 if __name__ == "__main__":
     main()

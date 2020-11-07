@@ -145,3 +145,5 @@ dmypy.json
 db/rare.db
 .vscode
 rare.db
+db/*.db
+rare.sql
