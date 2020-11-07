@@ -13,7 +13,7 @@ class HandleRequests(BaseHTTPRequestHandler):
        
         if "?" in resource:
 
-            param = resource.split("?")
+            param = resource.split("?")[1]
             resource = resource.split("?")[0]
             pair = param.split("=")
             key = pair[0]
