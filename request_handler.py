@@ -119,9 +119,8 @@ class HandleRequests(BaseHTTPRequestHandler):
 
         if resource == "user":
             success = ""
-        if resource == "posts":
-            update_post(id, post_body)
-            success = update_user(id, post_body)
+        elif resource == "posts":
+            success = update_post(id, post_body)
         elif resource == "categories":
             success = update_category(id, post_body)
 
