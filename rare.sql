@@ -75,3 +75,4 @@ INSERT INTO `tags` VALUES (null, "tag3");
 INSERT INTO `categories` VALUES (null, "categories1");
 INSERT INTO `categories` VALUES (null, "categories2");
 
+SELECT * from users

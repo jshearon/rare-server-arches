@@ -50,7 +50,7 @@ CREATE TABLE `comments` (
 ALTER TABLE users
   ADD `created_on` DATETIME;
 
-SELECT * from users
+SELECT * from tags
 
 PRAGMA table_info(comments);
 
