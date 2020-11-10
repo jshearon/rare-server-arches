@@ -60,3 +60,27 @@ def delete_comment(id):
         DELETE FROM comments
         WHERE id = ?
         """, (id, ))
+
+def update_comment(id, new_comment):
+    with sqlite3.connect("./rare.db") as conn:
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        UPDATE comments
+            SET
+                post_id = ?,
+                subject = ?,
+                content = ?,
+                created_on = ?,
+                is_edited = ?
+        WHERE id = ?
+        """, (new_comment['post_id'], new_comment['subject'],
+              new_comment['content'], new_comment['created_on'],
+              new_comment['is_edited'], id, ))
+
+        rows_affected = db_cursor.rowcount
+
+    if rows_affected == 0:
+        return False
+    else:
+        return True

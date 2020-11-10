@@ -4,7 +4,7 @@ from tags import get_all_tags, get_tag_by_id, create_new_tag, update_tag, delete
 from users import get_user_by_id, get_user_by_email, create_new_user, delete_user, update_user
 from posts import get_all_posts, get_single_post, create_post, update_post, delete_post
 from categories.request import delete_category, get_all_categories, get_single_category, create_category, update_category
-from comments.request import create_comment, delete_comment, get_all_comments
+from comments.request import create_comment, delete_comment, get_all_comments, update_comment
 
 class HandleRequests(BaseHTTPRequestHandler):
 
@@ -128,6 +128,8 @@ class HandleRequests(BaseHTTPRequestHandler):
             success = update_category(id, post_body)
         elif resource == "tags":
             success = update_tag(id, post_body)
+        elif resource == "comments":
+            success = update_comment(id, post_body)
 
         if success:
             self._set_headers(204)
