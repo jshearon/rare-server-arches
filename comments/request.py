@@ -51,3 +51,12 @@ def create_comment(new_comment):
         new_comment['id'] = id
 
     return json.dumps(new_comment)
+
+def delete_comment(id):
+    with sqlite3.connect("./rare.db") as conn:
+        db_cursor = conn.cursor()
+
+        db_cursor.execute("""
+        DELETE FROM comments
+        WHERE id = ?
+        """, (id, ))
