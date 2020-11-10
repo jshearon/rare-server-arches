@@ -4,6 +4,7 @@ from tags import get_all_tags, get_tag_by_id, create_new_tag, update_tag, delete
 from users import get_user_by_id, get_user_by_email, create_new_user, delete_user, update_user
 from posts import get_all_posts, get_single_post, create_post, update_post, delete_post
 from categories.request import delete_category, get_all_categories, get_single_category, create_category, update_category
+from comments.request import get_all_comments, get_single_comment, get_comment_by_post_id
 
 class HandleRequests(BaseHTTPRequestHandler):
 
@@ -66,10 +67,15 @@ class HandleRequests(BaseHTTPRequestHandler):
                     response = f"{get_all_posts()}"
             elif resource == "comment":
                 if id is not None:
-                    response = ""
+                    response = f"{get_single_comment(id)}"
                 else:
+<<<<<<< Updated upstream
                     response = ""
             elif resource == "tags":
+=======
+                    response = f"{get_all_comments()}"
+            elif resource == "tag":
+>>>>>>> Stashed changes
                 if id is not None:
                     response = f"{get_tag_by_id(id)}"
                 else:
@@ -85,8 +91,8 @@ class HandleRequests(BaseHTTPRequestHandler):
 
             if key == "email" and resource == "user":
                 response = f"{get_user_by_email(value)}"
-            if key == "post_id" and resource == "comment":
-                response = ""
+            if key == "post_id" and resource == "comments":
+                response = f"{get_comment_by_post_id(value)}"
 
         self.wfile.write(response.encode())
 

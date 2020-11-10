@@ -64,8 +64,8 @@ INSERT INTO `tags` VALUES (null, "tag3");
 INSERT INTO `categories` VALUES (null, "categories1");
 INSERT INTO `categories` VALUES (null, "categories2");
 
-INSERT INTO `users` VALUES (null, 'Jonathan', 'north', "Jon", "gaikwad@ddd.com");
-INSERT INTO `users` VALUES (null, 'Phonesalo', 'south', "Phone", "nikhil@ddd.com");
+INSERT INTO `users` VALUES (null, 'Jonathan', 'north', "Jon", "gaikwad@ddd.com", "");
+INSERT INTO `users` VALUES (null, 'Phonesalo', 'south', "Phone", "nikhil@ddd.com", "");
 
 INSERT INTO `postTags` VALUES (null, 1, 1);
 INSERT INTO `postTags` VALUES (null, 1, 2);
