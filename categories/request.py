@@ -3,14 +3,8 @@ import json
 
 from models.category import Category
 
-CATEGORIES = [
-    Category(1, ""),
-    Category(2, ""),
-    Category(3, "")
-]
-
 def get_all_categories():
-    with sqlite3.connect("db/rare.db") as conn:
+    with sqlite3.connect("./rare.db") as conn:
 
         conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
@@ -35,7 +29,7 @@ def get_all_categories():
     return json.dumps(categories)
 
 def get_single_category(id):
-    with sqlite3.connect("db/rare.db") as conn:
+    with sqlite3.connect("./rare.db") as conn:
         
         conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
@@ -55,7 +49,7 @@ def get_single_category(id):
     return json.dumps(category.__dict__)
 
 def create_category(new_category):
-    with sqlite3.connect("db/rare.db") as conn:
+    with sqlite3.connect("./rare.db") as conn:
         db_cursor = conn.cursor()
 
         db_cursor.execute("""
@@ -72,7 +66,7 @@ def create_category(new_category):
     return json.dumps(new_category)
 
 def delete_category(id):
-    with sqlite3.connect("db/rare.db") as conn:
+    with sqlite3.connect("./rare.db") as conn:
 
         conn.row_factory = sqlite3.Row
         db_cursor = conn.cursor()
@@ -83,7 +77,7 @@ def delete_category(id):
         """, ( id, ))
 
 def update_category(id, new_category):
-    with sqlite3.connect("db/rare.db") as conn:
+    with sqlite3.connect("./rare.db") as conn:
         db_cursor = conn.cursor()
 
         db_cursor.execute("""
