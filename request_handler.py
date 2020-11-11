@@ -4,7 +4,7 @@ from tags import get_all_tags, get_tag_by_id, create_new_tag, update_tag, delete
 from users import get_user_by_id, get_user_by_email, create_new_user, delete_user, update_user
 from posts import get_all_posts, get_single_post, create_post, update_post, delete_post
 from categories.request import delete_category, get_all_categories, get_single_category, create_category, update_category
-from comments.request import create_comment, delete_comment, get_all_comments, update_comment
+from comments.request import create_comment, delete_comment, get_all_comments, update_comment, get_comment_by_post_id
 
 class HandleRequests(BaseHTTPRequestHandler):
 
@@ -86,6 +86,8 @@ class HandleRequests(BaseHTTPRequestHandler):
 
             if key == "email" and resource == "user":
                 response = f"{get_user_by_email(value)}"
+            if key == "post_id" and resource == "comment":
+                response = f"{get_comment_by_post_id(value)}"
 
         self.wfile.write(response.encode())
 
