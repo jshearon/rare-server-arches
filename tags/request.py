@@ -77,8 +77,8 @@ def create_new_tag(new_tag):
     SELECT 
       *
     FROM tags t
-    WHERE t.name LIKE ?
-    """, ( '%'+new_tag['name']+'%', ))
+    WHERE t.name = ?
+    """, ( new_tag['name'], ))
 
     row_exists = db_cursor.fetchone() is not None
     
