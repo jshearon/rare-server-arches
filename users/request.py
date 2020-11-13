@@ -45,10 +45,9 @@ def get_user_by_email(email):
     WHERE u.email LIKE ?
     """, ( '%'+email+'%', ))
 
-    row_exists = db_cursor.fetchone() is not None
-    token = 12345
-    if row_exists:
-      returnObject = {"valid": "valid", "token": token}
+    data = db_cursor.fetchone()
+    if data is not None:
+      returnObject = {"valid": "valid", "token": data['id']}
     else:
       returnObject = {"invalid":"invalid"}
     return json.dumps(returnObject)

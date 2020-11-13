@@ -41,7 +41,7 @@ def get_tags_by_postId(postId):
     dataset = db_cursor.fetchall()
 
     for row in dataset:
-      tag = PostTag(row['id'], row['name'])
+      tag = Tag(row['id'], row['name'])
       tags.append(tag.__dict__)
   return json.dumps(tags)
 

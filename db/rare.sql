@@ -50,7 +50,15 @@ CREATE TABLE `comments` (
 ALTER TABLE users
   ADD `created_on` DATETIME;
 
-SELECT * from postTags
+SELECT * from users
+
+SELECT
+        p.id,
+        t.name 
+      FROM postTags p
+      LEFT JOIN tags t
+        ON p.tag_id = t.id 
+      WHERE p.post_id = 1
 
 SELECT
         p.id,
