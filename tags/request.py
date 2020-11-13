@@ -1,6 +1,6 @@
 import sqlite3
 import json
-from models import Tag
+from models import Tag, PostTag
 
 
 def get_tag_by_id(id):
@@ -20,6 +20,30 @@ def get_tag_by_id(id):
 
     tag = Tag(data['id'], data['name'])
     return json.dumps(tag.__dict__)
+
+def get_tags_by_postId(postId):
+  with sqlite3.connect("./rare.db") as conn:
+    conn.row_factory = sqlite3.Row
+    db_cursor = conn.cursor()
+
+    db_cursor.execute("""
+      SELECT
+        p.id,
+        t.name 
+      FROM postTags p
+      LEFT JOIN tags t
+        ON p.tag_id = t.id 
+      WHERE p.post_id = ?
+    """, (postId, ))
+
+    tags = []
+
+    dataset = db_cursor.fetchall()
+
+    for row in dataset:
+      tag = PostTag(row['id'], row['name'])
+      tags.append(tag.__dict__)
+  return json.dumps(tags)
 
 def get_all_tags():
     with sqlite3.connect("./rare.db") as conn:
