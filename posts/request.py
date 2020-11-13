@@ -86,8 +86,8 @@ def create_post(new_post):
         VALUES
             ( ?, ?, ?, ?, ?, ?);
         """, (new_post['title'], new_post['content'],
-              new_post['category_id'], new_post['publication_date'],
-              new_post['user_id'], new_post['header_img_url'], ))
+              new_post['categoryId'], new_post['publicationDate'],
+              new_post['userId'], new_post['headerImgUrl'], ))
 
         # The `lastrowid` property on the cursor will return
         # the primary key of the last thing that got added to
@@ -126,8 +126,8 @@ def update_post(id, new_post):
                 header_img_url = ?
         WHERE id = ?
         """, (new_post['title'], new_post['content'],
-              new_post['category_id'], new_post['publication_date'],
-              new_post['user_id'], new_post['header_img_url'], id, ))
+              new_post['categoryId'], new_post['publicationDate'],
+              new_post['userId'], new_post['headerImgUrl'], id, ))
 
         # Were any rows affected?
         # Did the client send an `id` that exists?
