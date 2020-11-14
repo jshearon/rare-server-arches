@@ -1,6 +1,6 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from tags import get_all_tags, get_tags_by_postId, create_new_tag, update_tag, delete_tag
+from tags import get_all_tags, get_tags_by_postId, create_new_tag, update_tag, delete_tag, delete_post_tag
 from users import get_user_by_id, get_user_by_email, create_new_user, delete_user, update_user
 from posts import get_all_posts, get_single_post, create_post, update_post, delete_post
 from categories.request import delete_category, get_all_categories, get_single_category, create_category, update_category
@@ -153,6 +153,8 @@ class HandleRequests(BaseHTTPRequestHandler):
             delete_category(id)
         elif resource == "tags":
             delete_tag(id)
+        elif resource == "posttags":
+            delete_post_tag(id)
         elif resource == "comments":
             delete_comment(id)
 

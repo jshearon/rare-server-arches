@@ -1,6 +1,6 @@
 import sqlite3
 import json
-from models import Tag, PostTag
+from models import Tag, PostTag, PostTagJoined
 
 
 def get_tag_by_id(id):
@@ -29,7 +29,8 @@ def get_tags_by_postId(postId):
     db_cursor.execute("""
       SELECT
         p.id,
-        t.name 
+        t.name,
+        p.post_id 
       FROM postTags p
       LEFT JOIN tags t
         ON p.tag_id = t.id 
@@ -41,7 +42,7 @@ def get_tags_by_postId(postId):
     dataset = db_cursor.fetchall()
 
     for row in dataset:
-      tag = Tag(row['id'], row['name'])
+      tag = PostTagJoined(row['id'], row['name'], row['post_id'])
       tags.append(tag.__dict__)
   return json.dumps(tags)
 
@@ -120,5 +121,15 @@ def delete_tag(id):
   
     db_cursor.execute("""
       DELETE FROM tags
+      WHERE id = ?
+      """, ( id, ))
+
+def delete_post_tag(id):
+  with sqlite3.connect("./rare.db") as conn:
+    conn.row_factory = sqlite3.Row
+    db_cursor = conn.cursor()
+  
+    db_cursor.execute("""
+      DELETE FROM postTags
       WHERE id = ?
       """, ( id, ))

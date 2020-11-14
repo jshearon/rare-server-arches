@@ -50,7 +50,8 @@ CREATE TABLE `comments` (
 ALTER TABLE users
   ADD `created_on` DATETIME;
 
-SELECT * from users
+SELECT * from tags
+SELECT * from posttags
 
 SELECT
         p.id,
@@ -83,11 +84,11 @@ INSERT INTO `categories` VALUES (null, "categories2");
 INSERT INTO `users` VALUES (null, 'Jonathan', 'north', "Jon", "gaikwad@ddd.com", "");
 INSERT INTO `users` VALUES (null, 'Phonesalo', 'south', "Phone", "nikhil@ddd.com", "");
 
-INSERT INTO `postTags` VALUES (null, 1, 7);
-INSERT INTO `postTags` VALUES (null, 1, 8);
-INSERT INTO `postTags` VALUES (null, 1, 9);
-INSERT INTO `postTags` VALUES (null, 2, 9);
-INSERT INTO `postTags` VALUES (null, 2, 15);
+INSERT INTO `postTags` VALUES (null, 3, 6);
+INSERT INTO `postTags` VALUES (null, 3, 7);
+INSERT INTO `postTags` VALUES (null, 4, 8);
+INSERT INTO `postTags` VALUES (null, 4, 9);
+INSERT INTO `postTags` VALUES (null, 5, 12);
 
 INSERT INTO `posts` VALUES (null, "Mo Silvera", "201 Created St tag1", 1, 'jan 1 2009 13:22:15', 1, "imageURL");
 INSERT INTO `posts` VALUES (null, "Bryan Nilsen", "500 Internal Error Blvd", 1, 'jan 1 2010 13:22:15', 1, "imageURL");
