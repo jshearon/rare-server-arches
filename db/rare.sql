@@ -51,6 +51,23 @@ ALTER TABLE users
   ADD `created_on` DATETIME;
 
 SELECT * from tags
+SELECT * from posttags
+
+SELECT
+        p.id,
+        t.name 
+      FROM postTags p
+      LEFT JOIN tags t
+        ON p.tag_id = t.id 
+      WHERE p.post_id = 1
+
+SELECT
+        p.id,
+        t.name 
+      FROM postTags p
+      LEFT JOIN tags t
+        ON p.tag_id = t.id 
+      WHERE p.post_id = 2
 
 PRAGMA table_info(comments);
 
@@ -67,12 +84,11 @@ INSERT INTO `categories` VALUES (null, "categories2");
 INSERT INTO `users` VALUES (null, 'Jonathan', 'north', "Jon", "gaikwad@ddd.com", "");
 INSERT INTO `users` VALUES (null, 'Phonesalo', 'south', "Phone", "nikhil@ddd.com", "");
 
-INSERT INTO `postTags` VALUES (null, 1, 1);
-INSERT INTO `postTags` VALUES (null, 1, 2);
-INSERT INTO `postTags` VALUES (null, 1, 3);
-INSERT INTO `postTags` VALUES (null, 2, 1);
-INSERT INTO `postTags` VALUES (null, 2, 2);
-INSERT INTO `postTags` VALUES (null, 2, 3);
+INSERT INTO `postTags` VALUES (null, 3, 6);
+INSERT INTO `postTags` VALUES (null, 3, 7);
+INSERT INTO `postTags` VALUES (null, 4, 8);
+INSERT INTO `postTags` VALUES (null, 4, 9);
+INSERT INTO `postTags` VALUES (null, 5, 12);
 
 INSERT INTO `posts` VALUES (null, "Mo Silvera", "201 Created St tag1", 1, 'jan 1 2009 13:22:15', 1, "imageURL");
 INSERT INTO `posts` VALUES (null, "Bryan Nilsen", "500 Internal Error Blvd", 1, 'jan 1 2010 13:22:15', 1, "imageURL");

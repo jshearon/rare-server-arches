@@ -1,6 +1,6 @@
 import json
 from http.server import BaseHTTPRequestHandler, HTTPServer
-from tags import get_all_tags, get_tag_by_id, create_new_tag, update_tag, delete_tag
+from tags import get_all_tags, get_tags_by_postId, create_new_tag, update_tag, delete_tag, delete_post_tag, create_new_post_tag
 from users import get_user_by_id, get_user_by_email, create_new_user, delete_user, update_user
 from posts import get_all_posts, get_single_post, create_post, update_post, delete_post
 from categories.request import delete_category, get_all_categories, get_single_category, create_category, update_category
@@ -72,7 +72,7 @@ class HandleRequests(BaseHTTPRequestHandler):
                     response = f"{get_all_comments()}"
             elif resource == "tags":
                 if id is not None:
-                    response = f"{get_tag_by_id(id)}"
+                    response = f"{get_tags_by_postId(id)}"
                 else:
                     response = f"{get_all_tags()}"
             elif resource == "categories":
@@ -108,6 +108,8 @@ class HandleRequests(BaseHTTPRequestHandler):
             new_object = create_category(post_body)
         elif resource == "tags":
             new_object = create_new_tag(post_body)
+        elif resource == "posttags":
+            new_object = create_new_post_tag(post_body)
         elif resource == "comments":
             new_object = create_comment(post_body)
             
@@ -153,6 +155,8 @@ class HandleRequests(BaseHTTPRequestHandler):
             delete_category(id)
         elif resource == "tags":
             delete_tag(id)
+        elif resource == "posttags":
+            delete_post_tag(id)
         elif resource == "comments":
             delete_comment(id)
 
