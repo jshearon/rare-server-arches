@@ -97,6 +97,34 @@ def create_new_tag(new_tag):
       new_tag['id'] = id
       return json.dumps({"valid": "valid"})
 
+def create_new_post_tag(new_tag):
+  with sqlite3.connect("./rare.db") as conn:
+    conn.row_factory = sqlite3.Row
+    db_cursor = conn.cursor()
+
+    db_cursor.execute("""
+    SELECT 
+      *
+    FROM postTags t
+    WHERE t.post_id = ? AND t.tag_id = ?
+    """, ( new_tag['post_id'], new_tag['tag_id']) )
+
+    row_exists = db_cursor.fetchone() is not None
+    
+    if (row_exists or new_tag['post_id'] == "" or new_tag['tag_id'] == ""):
+      return json.dumps({"invalid": "Tag already Exists"})
+    else:
+      db_cursor.execute("""
+        INSERT INTO postTags
+          ( post_id, tag_id )
+        VALUES 
+          ( ?, ? )
+      """, ( new_tag['post_id'], new_tag['tag_id'] ))
+
+      id = db_cursor.lastrowid
+      new_tag['id'] = id
+      return json.dumps({"valid": "valid"})
+
 def update_tag(id, new_tag):
   with sqlite3.connect("./rare.db") as conn:
     conn.row_factory = sqlite3.Row
